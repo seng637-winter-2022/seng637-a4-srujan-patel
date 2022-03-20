@@ -227,4 +227,24 @@ public class DataUtilitiesTest {
         assertEquals(expected2, actual.getValue(b).doubleValue(), 0.01d); //index 1 positive test
 
     }
+    @Test
+    public void testEqual(){
+
+        double[][] a1 = new double[][]{{1, 2, 3}, {4, 5, 6}};
+        double[][] a2 = new double[][]{{1, 2, 3}, {4, 5, 6}};
+        assertTrue(DataUtilities.equal(a1, a2));
+
+        double[][] a3 = null;
+        double[][] a4 = null;
+        assertFalse(DataUtilities.equal(a3, a1)); //first parameter null
+        assertFalse(DataUtilities.equal(a1, a3)); //second paramenter null
+
+        assertTrue(DataUtilities.equal(a4, a3)); //both are null
+
+        double[][] a5 = new double[][]{{1, 2, 3, 4,6,8}, {5, 6, 7}, {1, 1, 7}}; //different length compare
+        assertFalse(DataUtilities.equal(a1, a5));
+
+        double[][] a6 = new double[][]{{1, 2, 3}, {5, 5, 6}};
+        assertFalse(DataUtilities.equal(a1, a6)); //same length but not same value
+    }
 }

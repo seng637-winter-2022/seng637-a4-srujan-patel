@@ -197,5 +197,123 @@ public class RangeTest {
         assertEquals(true,act_output1);
         assertEquals(true,act_output_1);
         assertEquals(true,act_output_2);
+
+        //we are adding test case for constrain method to increase mutattion score
+
+
+
+    }
+
+    @Test
+    public void testConstrain() {
+        Range exampleRange1 = new Range(10, 15); //positive range
+        double actual1 = exampleRange1.constrain(13); //value in middle
+
+        assertEquals(13, actual1, 0);
+
+        Range   exampleRange2 = new Range(10, 15);//positive range
+        double  expectedValue = 15;
+        double actual2 = exampleRange2.constrain(18);//greater than upper bound
+        assertEquals(expectedValue, actual2, 0);
+
+        Range exampleRange3 = new Range(10, 15); //positive
+        double expectedValue3 = 10; //less than the lower bound
+        double actual3 = exampleRange3.constrain(7);
+
+        assertEquals(expectedValue3, actual3, 0);
+
+       Range exampleRange4 = new Range(-8, -4); //negative
+        double expectedValue4 = -5;
+        double actual4 = exampleRange4.constrain(-5); //middle value
+
+        assertEquals(expectedValue4, actual4, 0);
+
+        Range exampleRange5 = new Range(-8, -4); //negative
+        double expectedValue5 = -4;
+        double actual5 = exampleRange5.constrain(-2); //bigger than upper bound
+
+        assertEquals(expectedValue5, actual5, 0);
+
+        Range exampleRange6 = new Range(-8, -4); //negative range
+        double expectedValue6 = -8;
+        double actual6 = exampleRange6.constrain(-20); //less than lower bound
+
+        assertEquals(expectedValue6, actual6, 0);
+
+        Range exampleRange7 = new Range(10, 15);
+        double expectedValue7 = 10;
+        double expectedValue8 = 15;
+
+        double actual7 = exampleRange7.constrain(10);
+        double actual8 = exampleRange7.constrain(15);
+
+        assertEquals(expectedValue7, actual7, 0); //equal to lower
+        assertEquals(expectedValue8, actual8, 0); //equal to lower
+
+        Range exampleRange8 = new Range(-10, -5);
+        double expectedValue9 = -10;
+        double expectedValue10 = -5;
+
+        double actual9 = exampleRange8.constrain(-10);
+        double actual10 = exampleRange8.constrain(-5);
+
+        assertEquals(expectedValue9, actual9, 0); //equal to lower
+        assertEquals(expectedValue10, actual10, 0); //equal to lower
+    }
+
+    @Test
+    public void testContains(){
+        Range exampleRange1 = new Range(1, 10);
+        assertTrue(exampleRange1.contains(1)); //lower edge testing
+        assertTrue(exampleRange1.contains(10));// upper edge testing
+        assertTrue(exampleRange1.contains(5));// middle value
+        assertFalse(exampleRange1.contains(20));// greater than
+        assertFalse(exampleRange1.contains(0));// less than
+
+        Range exampleRange2 = new Range(-10, -2);
+        assertTrue(exampleRange2.contains(-2)); //upper edge testing
+        assertTrue(exampleRange2.contains(-10));// lower edge testing
+        assertTrue(exampleRange2.contains(-5));// middle value
+        assertFalse(exampleRange2.contains(-20));// less than
+        assertFalse(exampleRange2.contains(-1));// greater than
+
+
+    }
+    @Test
+    public void testEquals(){
+
+      Range exampleRange1 = new Range(4, 5);
+      Range  exampleRange2 = new Range(4, 5);
+        assertTrue(exampleRange1.equals(exampleRange2)); //equal values
+
+       Range exampleRange3 = new Range(3, 5);
+        Range exampleRange4 = new Range(7, 10);
+        assertFalse(exampleRange3.equals(exampleRange4)); //diffrent values expect false
+
+        Range exampleRange5 = new Range(12, 15);
+        Range exampleRange6 = null;
+
+        assertFalse(exampleRange5.equals(exampleRange6)); //null comparision returns false
+
+
+        Range exampleRange7 = new Range(-6, -1); //negative same
+        Range exampleRange8 = new Range(-6, -1);
+        assertTrue(exampleRange7.equals(exampleRange8));
+
+        Range exampleRange9 = new Range(-6, -1); //different negative
+        Range exampleRange10 = new Range(-26, -17);
+        assertFalse(exampleRange9.equals(exampleRange10));
+
+        exampleRange1 = new Range(10, 12); //positive range
+        exampleRange2 = new Range(-16, -7); //negative range
+        assertFalse(exampleRange1.equals(exampleRange2)); //return false
+
+    }
+
+    @Test
+    public void testToString(){
+        Range exampleRange = new Range(-2000000, 2000000);
+        assertEquals("Range[" + -2000000.0 + "," + 2000000.0 + "]", exampleRange.toString());
+
     }
 }
