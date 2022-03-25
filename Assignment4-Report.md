@@ -113,10 +113,14 @@ Active Mutators Found:
 In this case as well most of the mutants that did not get killed are because of no coverage. Since our code does not cover test cases for all the methods, this is expected.
 # A discussion on the effect of equivalent mutants on mutation score accuracy
 
+Equivalent mutants are mutants that behave exactly like orignal code. This means that it is in their nature to hide within the program and act in a way that mimics the behaviour of the original source code under test.
 
+The occurrence of equivalent mutations has an impact on mutation testing's quantitative mutation score accuracy. Equivalent mutants, in particular, allow for a block of code under examination to have a higher mutation score in fact than the tool displays. Furthermore, some modifications are not detectable by test cases, such as the post incrementation of a returned value, which has no impact on production code and will not be discovered. As a result of situations like this, the mutation score may be less precise. Therefore, it can be concluded that while mutation score is a helpful tool test for getting a general idea of the code's robustness, but it should not be used to decide whether code is ready and adequately tested enough to be put to production.
+
+As it was suggested in the report guidelines, we looked at the Pitest report for mutants that had not been killed in order to find equivalent mutants. We made one observation that generally it was an equivalent mutant when a mutant developed from modifying the conditional values and survived. As a result, identifying equivalent mutations was a combination of reading the Pitest report and looking at the source code simultaneously.
 
 # A discussion of what could have been done to improve the mutation score of the test suites
-An effective way to increase the mutation score by the required amount (10%) is by increasing the coverage through writing more test cases.
+We looked at the mutant logs to see which mutants made it through our tests. During this step, we tried to skim through the log for the largest red regions, which represent a large number of mutants that survived. We tried to jot down as much as we could and prioritise which areas we should work on first based on our group's familiarity. Then we wrote more unit tests in order to increase the mutation score by the required amount (10%), as suggested in the assignment guidelines.
 
 Img3
 ![mution score](media/mut.png)
@@ -155,9 +159,17 @@ Disadvantages of Mutation Testing:
 
 # Explain your SELENUIM test case design process
 
+Firstly, our team got familiar with the Selenium IDE and its playback features. We explored the website that we were going to test throughout this round of the testing process. We tried to understand how the website is laid out and what features could be selected for testing. 
+
+We did several trial runs at writing Selenium test cases, as we would become familiar with the spots in our scripts where assertions would be added when we really ran our tests.
+
+Then we execute our designed test cases and record them in SeleniumIDE. We went over our mock test scripts and run them in SeleniumIDE. We reviewed the SeleniumIDE-generated test script to ensure that the assertions we built were successfully captured. We then went back over the video footage to make sure the test case had caught all we wanted it to.
+
 # Explain the use of assertions and checkpoints
 
+Selenium uses assertions and checkpoints (also known as validations) to ensure that the system operates as anticipated. The application takes care of this automatically, making them simple to use. These validations are added by Selenium following any type of user input, such as a mouse click, scrolling, or entering text. If one of the inputs is unexpected or erroneous, the test case will come to a halt and fail at that checkpoint. If the assertion fails, this functions similarly to JUnit testing, which returns a failure.
 # how did you test each functionaity with different test data
+
 
 # Discuss advantages and disadvantages of Selenium vs. Sikulix
 
