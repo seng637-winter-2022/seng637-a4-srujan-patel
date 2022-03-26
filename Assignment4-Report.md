@@ -27,22 +27,30 @@ The mutation score can then be used to score the software test suite. The mutati
 
 # Link of demo video 
 
-Make a video of the demo and put its link here.
-All members must participate in the demo and the video should not be longer than 10 minutes.
 
 # Analysis of 10 Mutants of the Range class 
 In this section we will do analysis of least 10 mutants produced by Pitest for the Range class, and how they are killed or not by our original test suite. We are providing 5 instances where the mutant got killed and 5 where it didn't
 
 1. Pitest replaced double return with 0.0d for org/jfree/data/Range::getLowerBound → KILLED
+Analysis: The mutant replaced the return value with default double value. It got killed because our test case covers this scenario
 2. Pitest replaced double return with 0.0d for org/jfree/data/Range::getUpperBound → KILLED
+Analysis: The mutant replaced the return value with default double value. It got killed because our test case covers this scenario
 3. Pitest replaced boolean return with true for org/jfree/data/Range::intersects → KILLED
+Analysis: The mutant replaced the return value with true value. It got killed because our test case does account for the scenario where return (b1 > this.lower) is true
 4. Pitest replaced return value with null for org/jfree/data/Range::combineIgnoringNaN → KILLED
+Analysis: The mutant replaced the return value with null. It got killed because our test case does account for the scenario where return value of range is null
 5. Pitest replaced double return with 0.0d for org/jfree/data/Range::min → KILLED
+Analysis: The mutant replaced the return value with default double value. It got killed because our test case covers this scenario
 6. Pitest replaced double return with 0.0d for org/jfree/data/Range::min → NO_COVERAGE
+Analysis: There is no test case written for this method hence it doesn't have a coverage and thus does not get killed
 7. Pitest removed call to org/jfree/chart/util/ParamChecks::nullNotPermitted → SURVIVED
+Analysis: Here the call to ParamChecks::nullNotPermitted is removed which means the method no longer checks if the range is null. Since our test case does not account fot null range value this mutant survived
 8. Pitest replaced boolean return with true for org/jfree/data/Range::equals → NO_COVERAGE
+Analysis: There is no test case written for this method hence it doesn't have a coverage and thus does not get killed
 9. Pitest replaced int return with 0 for org/jfree/data/Range::hashCode → NO_COVERAGE
+Analysis: There is no test case written for this method hence it doesn't have a coverage and thus does not get killed
 10. Pitest replaced boolean return with true for org/jfree/data/Range::intersects → SURVIVED
+Analysis: Here the mutation has replaced the return value to true Range::intersects Since our test case does not account for this scenario mutant survived 
 # Report all the statistics and the mutation score for each test class
 
 Img1
@@ -159,19 +167,19 @@ Disadvantages of Mutation Testing:
 
 # Explain your SELENUIM test case design process
 
-Firstly, our team got familiar with the Selenium IDE and its playback features. We explored the website that we were going to test throughout this round of the testing process. We tried to understand how the website is laid out and what features could be selected for testing. 
-
-We did several trial runs at writing Selenium test cases, as we would become familiar with the spots in our scripts where assertions would be added when we really ran our tests.
-
-Then we execute our designed test cases and record them in SeleniumIDE. We went over our mock test scripts and run them in SeleniumIDE. We reviewed the SeleniumIDE-generated test script to ensure that the assertions we built were successfully captured. We then went back over the video footage to make sure the test case had caught all we wanted it to.
+We did the testing of Staples’s official website. As a part of the testing procedure, we first carried out an exploratory level testing of the website. In exploratory testing, we tested almost all the functions and links of the webpage. We didn’t find any bugs in the website in exploratory testing. Then we carried out automated testing using Selenium IDE in the firefox browser. Selenium IDE makes the whole testing process very simple as the tests are automatically written as we operate the website’s GUI. So, while testing the website we decided to check the website’s important functions by testing the working of the hyperlinks and push buttons present on the website. During the test we’ve added verification checkpoints that verifies the required text, presence of UI elements, checkboxes, and selected labels. We have tested the following functionalities: 1) Store Location, 2) Login, 3) Search Function, 4) Shop, 5) Deals, 6) Brands, 7) Services, 8) Cart. The placing of verification checkpoints was based on the exploratory testing which we carried out at first.
 
 # Explain the use of assertions and checkpoints
 
-Selenium uses assertions and checkpoints (also known as validations) to ensure that the system operates as anticipated. The application takes care of this automatically, making them simple to use. These validations are added by Selenium following any type of user input, such as a mouse click, scrolling, or entering text. If one of the inputs is unexpected or erroneous, the test case will come to a halt and fail at that checkpoint. If the assertion fails, this functions similarly to JUnit testing, which returns a failure.
+Verification checkpoints are used as they provide soft assertion and do not stop the flow of the program. In the assignment verify text is used to verify the text of the UI elements. Verify value is used to check whether the given text is matching the attribute value of the UI element. With the help of verifying the selected label, we verified whether the given option is selected in the dropdown menu, verifying editable verifies whether the UI element is editable or not. For the verification of checkboxes verify checked/ not checked command is used and lastly to verify the presence of a UI element verify presence command is used.
+
 # how did you test each functionaity with different test data
 
+In the above-mentioned functionalities, which were tested Login command was tested for different valid and invalid user inputs. However, it was noted that the state of the webpage changed after successfully logging in and logging out. So, the next invalid input was showing an error in the test execution due to which we separately tested both the inputs. The functions like shop, brands, deals, cart, search were tested for different products sold by the company.
 
 # Discuss advantages and disadvantages of Selenium vs. Sikulix
+
+Both the software simplify the whole testing process by automating it. While working with selenium the test execution stopped at certain points which included mouse click, mouse move over, double click commands. We couldn’t figure out the reason for such a problem. We were sure that there weren’t any bugs at such points as we have already carried out the exploratory testing. Along with that, we encountered some problems at the verification checkpoints as some of the buttons and links couldn’t be automatically verified. In both cases, we got an execution time-out error. 
 
 Advantages of Selenium Testing:
 -	Selenium is a free and open-source application.
